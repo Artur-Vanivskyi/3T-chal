@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from './Button';
+import Cell from './Cell';
 
 function Game() {
 
@@ -68,7 +69,11 @@ function Game() {
    <div className="board">
     <h1>TIC TAC TOE</h1>
     <Button resetGame={resetGame} />
-
+    <div className="game">
+        {Array.from("012345678").map((index) => (
+            <Cell />
+        ))}
+    </div>
    </div>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Button() {
+function Button({resetGame}) {
   return (
     <div>Button</div>
   )

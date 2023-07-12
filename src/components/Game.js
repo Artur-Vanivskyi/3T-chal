@@ -1,7 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import Board from './Board';
+import React, { useState } from 'react'
 
 function Game() {
+
+    const [cells, setCells] = useState([]);
+    const [turn, setTurn] = useState("X");
+    const [winner, setWinner] = useState(null);
 
     const WINNING_COMBINATIONS = [
         [0, 1, 2],
@@ -14,54 +17,54 @@ function Game() {
         [2, 4, 6],
       ];
 
-      const [arr, setArr] = useState([]);
-      const [usersTurn, setUsersTurn] = useState(true);
-      const [message, setMessage] = useState("");
-
-      useEffect(() => {
-        if(arr.length >= 5){
-            const winnerCheck = (playerIndex) => {
-                let arr2 = arr.filter((value, ind) => ind % 2 === playerIndex);
-
-                WINNING_COMBINATIONS.forEach((combination) => {
-                    if(combination.every((element) => arr2.includes(element))){
-                        if(playerIndex === 0){
-                            setMessage("You won");
-                        }else{
-                            setMessage("PC won");
-                        }
-                    }
-                })
-            };
-
-            winnerCheck(0);
-            winnerCheck(1);
-        }
-
-        if(arr.length === 9 && !message){
-            setMessage("A tie!");
-        }
-      }, [arr, message]);
-
-const userMove = (event) => {
-    if(event.target.firstChild.innerHTML === '' && !message && usersTurn){
-        event.target.firstChild.innerHTML = 'X';
-        const squareIndex = parseInt(event.target.getAttribute('number'));
-        setArr((prevArr) => [...prevArr, squareIndex]);
-        setUsersTurn(false);
+    const endGame = () => {
+        let isTheEndGame = true;
+        cells.forEach(cell => {
+            if(!cell){
+                isTheEndGame = false;
+            }
+        })
+        return isTheEndGame;
     }
-};
+
+      const checkWinner = () => {
+       
+        const winSet = WINNING_COMBINATIONS.find((combination) => {
+            const [a, b, c] = combination;
+            return cells[a] && cells[a] === cells[b] && cells[a] === cells[c];
+        });
+
+        return winSet ? cells[winSet[0]] : null;
+        
+      }
+
+      const handleClick = (event) => {
+        const c = cells;
+
+        c[event.target] = turn;
+        setCells(c);
+        setTurn(turn === "X" ? "O" : "X");
+        const win = checkWinner();
+        if(win){
+            setWinner(win);
+        }else if(endGame()){
+            setWinner("X | O");
+        };
+
+      };
 
 
-
-
-
+      const resetGame = () => {
+        setCells([]);
+        setTurn("X");
+        setWinner(null);
+      }
 
 
 
 
   return (
-    <div><Board /></div>
+    <div>Game</div>
   )
 }
 

@@ -8,3 +8,40 @@
   --cell-size: 180px;
   --mark-size: calc(var(--cell-size) * .9);
 }
+
+main {
+  text-align: center;
+  padding: 1em;
+  max-width: 100%;
+  margin: 0 auto;
+ 
+}
+
+.game {
+  border: 1px solid red;
+}
+
+.game-frame {
+  max-width: 500px;
+  min-height: 500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  border: 1px solid red;
+}
+
+.title {
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 46px;
+}
+
+.reset {
+  color: white;
+  margin-top: 20px;
+  font-size: 26px;
+  cursor: pointer;
+}

@@ -40,7 +40,7 @@ function Game() {
         
       }
 
-      const handleClick = (event) => {
+      const handleUpdate = (event) => {
         const c = cells;
 
         c[event.target] = turn;
@@ -71,7 +71,12 @@ function Game() {
     <Button resetGame={resetGame} />
     <div className="game">
         {Array.from("012345678").map((index) => (
-            <Cell />
+            <Cell 
+            key={index}
+            index={index}
+            handleUpdate={handleUpdate}
+            clsName={cells[index]}
+            />
         ))}
     </div>
    </div>

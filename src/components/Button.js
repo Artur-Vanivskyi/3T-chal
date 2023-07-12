@@ -2,7 +2,7 @@ import React from 'react'
 
 function Button({resetGame}) {
   return (
-    <div>Button</div>
+   <button onClick={() => resetGame()}>Start Game</button>
   )
 }
 

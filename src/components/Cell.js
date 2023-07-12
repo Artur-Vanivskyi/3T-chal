@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 
-function Cell() {
+function Cell({ handleUpdate, index, clsName }) {
+  const handleCellClick = () => {
+    handleUpdate(index);
+  };
+
   return (
-    <div>Cell</div>
-  )
+    <div className="cell">{clsName && <span className={clsName}></span>}</div>
+  );
 }
 
 export default Cell;

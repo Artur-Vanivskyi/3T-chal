@@ -10,6 +10,38 @@
     cursor: pointer;
 }
 
+span {
+    display: block;
+    position: relative;
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    border: 8px solid transparent;
+    
+}
+
+.x::after,
+.x::before {
+        position: absolute;
+        content: "";
+        width: 150%;
+        height: 8px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        background: #00FFDD;
+        border-radius: 5px;
+    }
+
+    .x::after {
+        transform: translate(-50%, -50%) rotate(45deg);
+        opacity: 1;
+    }
+
+    .o {
+        border-color: #ffa02e;
+    }
+
 .cell:first-child,
 .cell:nth-child(2),
 .cell:nth-child(3) {
@@ -30,67 +62,16 @@
     border-bottom: none;
 }
 
-.cell.x,
-.cell.circle {
-    cursor: not-allowed;
-}
 
 
-.cell.x::before,
-.cell.x::after {
-    background-color: #00FFDD;
-    border-radius: 50%;
-}
 
-.cell.circle::before {
-    background-color: #00FFDD;
-}
 
-.board.x .cell:not(.x):not(.circle):hover::before,
-.board.x .cell:not(.x):not(.circle):hover::after,
-.board.circle .cell:not(.x):not(.circle):hover::before {
-    background-color: #E8FFC2;
-    border-radius: 50%;
-}
 
-.cell.x::before,
-.cell.x::after,
-.board.x .cell:not(.x):not(.circle):hover::before,
-.board.x .cell:not(.x):not(.circle):hover::after {
-    content: "";
-    position: absolute;
-    width: calc(var(--mark-size) * .18);
-    height: var(--mark-size);
-}
 
-.cell.x::before,
-.board.x .cell:not(.x):not(.circle):hover::before {
-    transform: rotate(45deg);
-}
 
-.cell.x::after,
-.board.x .cell:not(.x):not(.circle):hover::after {
-    transform: rotate(-45deg);
-}
 
-.cell.circle::before,
-.cell.circle::after,
-.board.circle .cell:not(.x):not(.circle):hover::before,
-.board.circle .cell:not(.x):not(.circle):hover::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-}
 
-.cell.circle::before,
-.board.circle .cell:not(.x):not(.circle):hover::before {
-    width: var(--mark-size);
-    height: var(--mark-size);
-}
 
-.cell.circle::after,
-.board.circle .cell:not(.x):not(.circle):hover::after {
-    width: calc(var(--mark-size) *.8);
-    height: calc(var(--mark-size) *.8);
-    background-color: #1f1f38;
-}
+
+
+

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import Cell from "./Cell";
 
-import "./game.css";
-
 function Game() {
   const initialArray = Array(9).fill("");
   const [cells, setCells] = useState(initialArray);
@@ -21,16 +19,6 @@ function Game() {
     [2, 4, 6],
   ];
 
-  const endGame = () => {
-    let isTheEndGame = true;
-    cells.forEach((cell) => {
-      if (!cell) {
-        isTheEndGame = false;
-      }
-    });
-    return isTheEndGame;
-  };
-
   const checkWinner = () => {
     const winSet = WINNING_COMBINATIONS.find((combination) => {
       const [a, b, c] = combination;
@@ -40,20 +28,30 @@ function Game() {
     return winSet ? cells[winSet[0]] : null;
   };
 
+  const checkEndTheGame = () => {
+    let isTheEndGame = true;
+    cells.forEach((cell) => {
+      if (!cell) {
+        isTheEndGame = false;
+      }
+    });
+    return isTheEndGame;
+  };
+
   const updateCells = (ind) => {
     if (cells[ind] || winner) {
       return;
     }
 
-    const c = cells;
+    const s = cells;
+    s[ind] = turn;
+    setCells(s);
 
-    c[ind] = turn;
-    setCells(c);
     setTurn(turn === "x" ? "o" : "x");
     const win = checkWinner();
     if (win) {
       setWinner(win);
-    } else if (endGame()) {
+    } else if (checkEndTheGame()) {
       setWinner("x | o");
     }
   };
@@ -64,15 +62,17 @@ function Game() {
     setWinner(null);
   };
 
-  const minimax = (depth, cells, isMaxPlayer) => {
+  const minimax = (cells, depth, isMaximizingPlayer) => {
     const winner = checkWinner();
     if (winner !== null) {
       return winner === "o" ? 10 - depth : depth - 10;
     }
 
-    if (endGame()) return 0;
+    if (checkEndTheGame()) {
+      return 0;
+    }
 
-    if (isMaxPlayer) {
+    if (isMaximizingPlayer) {
       let maxEval = -Infinity;
       for (let i = 0; i < cells.length; i++) {
         if (cells[i] === "") {
@@ -122,9 +122,8 @@ function Game() {
 
   return (
     <div className="tic-tac-toe">
-      <h1>TIC TAC TOE</h1>
+      <h1> TIC-TAC-TOE </h1>
       <Button className="topBtn" resetGame={resetGame} />
-
       <div className="game">
         {Array.from("012345678").map((ind) => (
           <Cell
@@ -140,9 +139,9 @@ function Game() {
           <div className="text">
             <h2>
               {winner === "x"
-                ? "You won"
+                ? "You won!"
                 : winner === "o"
-                ? "You lost"
+                ? "You lost!"
                 : "No winner"}
             </h2>
             <div>

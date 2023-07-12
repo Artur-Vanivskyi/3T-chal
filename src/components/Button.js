@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function Button({resetGame, className}) {
+function Button({ resetGame, className }) {
   return (
-   <button onClick={() => resetGame()} className={className} >Start Game</button>
-  )
+    <button onClick={() => resetGame()} className={className}>
+      Start Game
+    </button>
+  );
 }
 
 export default Button;

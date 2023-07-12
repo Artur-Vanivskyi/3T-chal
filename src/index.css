@@ -6,7 +6,7 @@
 
 :root {
   --cell-size: 180px;
-  --mark-size: calc(var(--cell-size) * .9);
+
 }
 
 body {
@@ -22,11 +22,11 @@ body {
 
 @keyframes switch-color {
   from {
-      background-position: 0% center;
+    background-position: 0% center;
   }
 
   to {
-      background-position: -200% center;
+    background-position: -200% center;
   }
 }
 
@@ -40,7 +40,7 @@ body {
   font-size: 42px;
 }
 
-.tic-tac-toe .topBtn {
+.tic-tac-toe .topBtn, .bottomBtn {
   font-size: 1.2rem;
   background-color: #1d2b3a;
   color: #00FFDD;
@@ -52,11 +52,16 @@ body {
   cursor: pointer;
 }
 
+.winner .bottomBtn {
+  background-color: transparent;
+}
+
 .tic-tac-toe .topBtn:hover {
   background: transparent;
   color: white;
-  
+
 }
+
 .tic-tac-toe .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -81,7 +86,6 @@ body {
   background-clip: border-box;
   -webkit-background-clip: text;
   background-size: 200%;
-  
   width: 70%;
   max-width: 400px;
   height: 300px;
@@ -90,22 +94,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .winner .text h2 {
   font-size: 3.5em;
   margin: 15px 0;
-}
-
-.winner .text .bottomBtn {
-  font-size: 1.2rem;
-background-color: transparent;
-  color: black;
-  border: 2px solid #00FFDD;
-  text-transform: uppercase;
-  border-radius: 100px;
-  padding: .5rem .5em;
-  margin: 10px 0 30px 0;
-  cursor: pointer;
 }

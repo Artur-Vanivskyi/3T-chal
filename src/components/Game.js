@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import Button from './Button';
 
 function Game() {
 
@@ -64,7 +65,11 @@ function Game() {
 
 
   return (
-    <div>Game</div>
+   <div className="board">
+    <h1>TIC TAC TOE</h1>
+    <Button resetGame={resetGame} />
+
+   </div>
   )
 }
 

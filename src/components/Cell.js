@@ -1,12 +1,15 @@
 import React from "react";
+import "./cell.css";
 
-function Cell({ handleUpdate, index, clsName }) {
+function Cell({ updateCells, ind, clsName }) {
   const handleCellClick = () => {
-    handleUpdate(index);
+    updateCells(ind);
   };
 
   return (
-    <div className="cell">{clsName && <span className={clsName}></span>}</div>
+    <div className="cell" onClick={handleCellClick}>
+      {clsName && <span className={clsName}></span>}
+    </div>
   );
 }
 

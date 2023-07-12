@@ -9,39 +9,103 @@
   --mark-size: calc(var(--cell-size) * .9);
 }
 
-main {
+body {
+  background: url("/src/assest/bg-texture.png"), #1f1f38;
+  font-family: consolas;
+}
+
+.tic-tac-toe {
+  width: fit-content;
+  margin: 40px auto;
   text-align: center;
-  padding: 1em;
-  max-width: 100%;
-  margin: 0 auto;
- 
 }
 
-.game {
-  border: 1px solid red;
+@keyframes switch-color {
+  from {
+      background-position: 0% center;
+  }
+
+  to {
+      background-position: -200% center;
+  }
 }
 
-.game-frame {
-  max-width: 500px;
-  min-height: 500px;
-  margin: 0 auto;
+.tic-tac-toe h1 {
+  -webkit-text-fill-color: transparent;
+  animation: switch-color 3s linear infinite;
+  background: linear-gradient(to right, #1DB9C3, #7027A0, #C32BAD, #F56FAD, #1DB9C3);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  background-size: 200%;
+  font-size: 42px;
+}
+
+.tic-tac-toe .topBtn {
+  font-size: 1.2rem;
+  background-color: #1d2b3a;
+  color: #00FFDD;
+  border: 2px solid #00FFDD;
+  text-transform: uppercase;
+  border-radius: 100px;
+  padding: .5rem .5em;
+  margin: 10px 0 30px 0;
+  cursor: pointer;
+}
+
+.tic-tac-toe .topBtn:hover {
+  background: transparent;
+  color: white;
+  
+}
+.tic-tac-toe .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   gap: 10px;
-  border: 1px solid red;
 }
 
-.title {
-  color: white;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  font-size: 46px;
+.winner {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
-.reset {
-  color: white;
-  margin-top: 20px;
-  font-size: 26px;
+.winner .text {
+  -webkit-text-fill-color: transparent;
+  animation: switch-color 3s linear infinite;
+  background: linear-gradient(to right, #1DB9C3, #7027A0, #C32BAD, #F56FAD, #1DB9C3);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  background-size: 200%;
+  
+  width: 70%;
+  max-width: 400px;
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; 
+}
+
+.winner .text h2 {
+  font-size: 3.5em;
+  margin: 15px 0;
+}
+
+.winner .text .bottomBtn {
+  font-size: 1.2rem;
+background-color: transparent;
+  color: black;
+  border: 2px solid #00FFDD;
+  text-transform: uppercase;
+  border-radius: 100px;
+  padding: .5rem .5em;
+  margin: 10px 0 30px 0;
   cursor: pointer;
 }

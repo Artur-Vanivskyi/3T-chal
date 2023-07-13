@@ -7,6 +7,9 @@ function Game() {
   const [cells, setCells] = useState(initialArray);
   const [turn, setTurn] = useState("x");
   const [winner, setWinner] = useState(null);
+  const [visible, setVisible] = useState(false);
+
+ 
 
   const WINNING_COMBINATIONS = [
     [0, 1, 2],
@@ -97,33 +100,73 @@ function Game() {
     }
   };
 
+
+// ------------------------------------------------------------------------------
+
+const getAvailableMoves = (board) => {
+    const availableMoves = [];
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] === "") {
+        availableMoves.push(i);
+      }
+    }
+    return availableMoves;
+  };
+  
+
   const bestMove = () => {
+    const randomNumber = Math.random(); // Generate a random number between 0 and 1
+    if (randomNumber < 0.1) {
+      makeRandomMove();
+    } else {
+      makeBestMove();
+    }
+  };
+
+  const makeRandomMove = () => {
+    const availableMoves = getAvailableMoves(cells);
+    const randomIndex = Math.floor(Math.random() * availableMoves.length);
+    const randomMove = availableMoves[randomIndex];
+  
+    cells[randomMove] = "o";
+    updateCells(cells);
+  };
+  
+  const makeBestMove = () => {
     let bestEval = -Infinity;
     let move = null;
+  
     for (let i = 0; i < cells.length; i++) {
       if (cells[i] === "") {
         cells[i] = "o";
         const evaluation = minimax(cells, 0, false);
         cells[i] = "";
+  
         if (evaluation > bestEval) {
           bestEval = evaluation;
           move = i;
         }
       }
     }
-    updateCells(move);
+  
+    cells[move] = "o";
+    updateCells(cells);
   };
+  
 
-  useEffect(() => {
-    if (turn === "o") {
-      bestMove();
-    }
-  }, [turn]);
+useEffect(() => {
+  if (turn === "o") {
+    bestMove();
+  }
+}, [turn]);
+
+
+
 
   return (
     <div className="tic-tac-toe">
       <h1> TIC-TAC-TOE </h1>
-      <Button className="topBtn" resetGame={resetGame} name="Reset"/>
+      {visible && <Button className="topBtn" resetGame={resetGame} name="Reset" /> }
       <div className="game">
         {Array.from("012345678").map((ind) => (
           <Cell
@@ -131,6 +174,8 @@ function Game() {
             ind={ind}
             updateCells={updateCells}
             clsName={cells[ind]}
+            setVisible={setVisible}
+            
           />
         ))}
       </div>

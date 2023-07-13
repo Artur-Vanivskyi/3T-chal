@@ -52,9 +52,12 @@ body {
   cursor: pointer;
 }
 
+
 .winner .bottomBtn {
   background-color: transparent;
 }
+
+
 
 .tic-tac-toe .topBtn:hover {
   background: transparent;

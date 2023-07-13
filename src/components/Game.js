@@ -4,6 +4,8 @@ import Cell from "./Cell";
 
 function Game() {
   const initialArray = Array(9).fill("");
+
+  // Setting the states
   const [cells, setCells] = useState(initialArray);
   const [turn, setTurn] = useState("x");
   const [winner, setWinner] = useState(null);
@@ -20,6 +22,7 @@ function Game() {
     [2, 4, 6],
   ];
 
+  // Function to check for a winner going thru all combinations
   const checkWinner = () => {
     const winSet = WINNING_COMBINATIONS.find((combination) => {
       const [a, b, c] = combination;
@@ -31,7 +34,10 @@ function Game() {
 
   const checkEndTheGame = () => {
     let isTheEndGame = true;
+
+    // check each cell in the array
     cells.forEach((cell) => {
+      // if any cell is empty, the game is not over yet
       if (!cell) {
         isTheEndGame = false;
       }
@@ -40,30 +46,33 @@ function Game() {
   };
 
   const updateCells = (ind) => {
+    // check if the cell is filled (taken) or there is winner already, in this case do nothing
     if (cells[ind] || winner) {
       return;
     }
 
-    const s = cells;
+    const s = cells; // copying array to a new variable
     s[ind] = turn;
-    setCells(s);
+    setCells(s); // updating the cells state
 
-    setTurn(turn === "x" ? "o" : "x");
+    setTurn(turn === "x" ? "o" : "x"); // switch the turn
     const win = checkWinner();
     if (win) {
-      setWinner(win);
+      setWinner(win); // set the winner if there is one
     } else if (checkEndTheGame()) {
-      setWinner("x | o");
+      setWinner("x | o"); // no winner, set a tie
     }
   };
 
+  // reset game, put all states to the initial values
   const resetGame = () => {
     setCells(initialArray);
     setTurn("x");
     setWinner(null);
   };
 
-  const minimax = (cells, depth, isMaximizingPlayer) => {
+  // minimax algorithm
+  const minimax = (cells, depth, isMaxPlayer) => {
     const winner = checkWinner();
     if (winner !== null) {
       return winner === "o" ? 10 - depth : depth - 10;
@@ -73,7 +82,7 @@ function Game() {
       return 0;
     }
 
-    if (isMaximizingPlayer) {
+    if (isMaxPlayer) {
       let maxEval = -Infinity;
       for (let i = 0; i < cells.length; i++) {
         if (cells[i] === "") {
@@ -98,8 +107,6 @@ function Game() {
     }
   };
 
-  // ------------------------------------------------------------------------------
-
   const getAvailableMoves = (board) => {
     const availableMoves = [];
     for (let i = 0; i < board.length; i++) {
@@ -112,18 +119,18 @@ function Game() {
 
   const bestMove = () => {
     const randomNumber = Math.random(); // Generate a random number between 0 and 1
+
     if (randomNumber < 0.1) {
       makeRandomMove();
     } else {
       makeBestMove();
     }
   };
-
+  // Random move to give a chance to the player to win again AI
   const makeRandomMove = () => {
     const availableMoves = getAvailableMoves(cells);
     const randomIndex = Math.floor(Math.random() * availableMoves.length);
     const randomMove = availableMoves[randomIndex];
-
     cells[randomMove] = "o";
     updateCells(cells);
   };

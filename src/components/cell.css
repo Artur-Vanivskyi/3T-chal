@@ -17,30 +17,30 @@ span {
     height: 70%;
     border-radius: 50%;
     border: 8px solid transparent;
-    
+
 }
 
 .x::after,
 .x::before {
-        position: absolute;
-        content: "";
-        width: 150%;
-        height: 8px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        background: #00FFDD;
-        border-radius: 5px;
-    }
+    position: absolute;
+    content: "";
+    width: 150%;
+    height: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    background: #00FFDD;
+    border-radius: 5px;
+}
 
-    .x::after {
-        transform: translate(-50%, -50%) rotate(45deg);
-        opacity: 1;
-    }
+.x::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 1;
+}
 
-    .o {
-        border-color: #ffa02e;
-    }
+.o {
+    border-color: #ffa02e;
+}
 
 .cell:first-child,
 .cell:nth-child(2),
@@ -61,17 +61,3 @@ span {
 .cell:nth-child(7) {
     border-bottom: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,8 +1,8 @@
 import React from "react";
 
-function Button({ resetGame, className, name, visible}) {
+function Button({ resetGame, className, name }) {
   return (
-    <button onClick={() => resetGame()} className={className} visible={visible} >
+    <button onClick={() => resetGame()} className={className}>
       {name}
     </button>
   );

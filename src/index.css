@@ -37,7 +37,8 @@ body {
   background-clip: border-box;
   -webkit-background-clip: text;
   background-size: 200%;
-  font-size: 42px;
+  font-size: 62px;
+  margin-bottom: 10px;
 }
 
 .tic-tac-toe .topBtn, .bottomBtn {

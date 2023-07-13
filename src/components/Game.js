@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import Cell from "./Cell";
+import { WINNING_COMBINATIONS } from "../utils/utils";
 
 function Game() {
   const initialArray = Array(9).fill("");
@@ -10,17 +11,6 @@ function Game() {
   const [turn, setTurn] = useState("x");
   const [winner, setWinner] = useState(null);
   const [visible, setVisible] = useState(false);
-
-  const WINNING_COMBINATIONS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
 
   // Function to check for a winner going thru all combinations
   const checkWinner = () => {
@@ -34,7 +24,6 @@ function Game() {
 
   const checkEndTheGame = () => {
     let isTheEndGame = true;
-
     // check each cell in the array
     cells.forEach((cell) => {
       // if any cell is empty, the game is not over yet
@@ -42,6 +31,7 @@ function Game() {
         isTheEndGame = false;
       }
     });
+
     return isTheEndGame;
   };
 
@@ -57,6 +47,7 @@ function Game() {
 
     setTurn(turn === "x" ? "o" : "x"); // switch the turn
     const win = checkWinner();
+
     if (win) {
       setWinner(win); // set the winner if there is one
     } else if (checkEndTheGame()) {
@@ -127,6 +118,7 @@ function Game() {
     }
   };
   // Random move to give a chance to the player to win again AI
+
   const makeRandomMove = () => {
     const availableMoves = getAvailableMoves(cells);
     const randomIndex = Math.floor(Math.random() * availableMoves.length);

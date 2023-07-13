@@ -123,7 +123,7 @@ function Game() {
   return (
     <div className="tic-tac-toe">
       <h1> TIC-TAC-TOE </h1>
-      <Button className="topBtn" resetGame={resetGame} />
+      <Button className="topBtn" resetGame={resetGame} name="Reset"/>
       <div className="game">
         {Array.from("012345678").map((ind) => (
           <Cell
@@ -145,7 +145,7 @@ function Game() {
                 : "No winner"}
             </h2>
             <div>
-              <Button className="bottomBtn" resetGame={resetGame} />
+              <Button className="bottomBtn" resetGame={resetGame} name="New Game" />
             </div>
           </div>
         </div>

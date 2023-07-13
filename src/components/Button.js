@@ -1,9 +1,9 @@
 import React from "react";
 
-function Button({ resetGame, className }) {
+function Button({ resetGame, className, name }) {
   return (
     <button onClick={() => resetGame()} className={className}>
-      Start Game
+      {name}
     </button>
   );
 }

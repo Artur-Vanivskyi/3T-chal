@@ -9,8 +9,6 @@ function Game() {
   const [winner, setWinner] = useState(null);
   const [visible, setVisible] = useState(false);
 
- 
-
   const WINNING_COMBINATIONS = [
     [0, 1, 2],
     [3, 4, 5],
@@ -100,10 +98,9 @@ function Game() {
     }
   };
 
+  // ------------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------------
-
-const getAvailableMoves = (board) => {
+  const getAvailableMoves = (board) => {
     const availableMoves = [];
     for (let i = 0; i < board.length; i++) {
       if (board[i] === "") {
@@ -112,7 +109,6 @@ const getAvailableMoves = (board) => {
     }
     return availableMoves;
   };
-  
 
   const bestMove = () => {
     const randomNumber = Math.random(); // Generate a random number between 0 and 1
@@ -127,46 +123,44 @@ const getAvailableMoves = (board) => {
     const availableMoves = getAvailableMoves(cells);
     const randomIndex = Math.floor(Math.random() * availableMoves.length);
     const randomMove = availableMoves[randomIndex];
-  
+
     cells[randomMove] = "o";
     updateCells(cells);
   };
-  
+
   const makeBestMove = () => {
     let bestEval = -Infinity;
     let move = null;
-  
+
     for (let i = 0; i < cells.length; i++) {
       if (cells[i] === "") {
         cells[i] = "o";
         const evaluation = minimax(cells, 0, false);
         cells[i] = "";
-  
+
         if (evaluation > bestEval) {
           bestEval = evaluation;
           move = i;
         }
       }
     }
-  
+
     cells[move] = "o";
     updateCells(cells);
   };
-  
 
-useEffect(() => {
-  if (turn === "o") {
-    bestMove();
-  }
-}, [turn]);
-
-
-
+  useEffect(() => {
+    if (turn === "o") {
+      bestMove();
+    }
+  }, [turn]);
 
   return (
     <div className="tic-tac-toe">
-      <h1> TIC-TAC-TOE </h1>
-      {visible && <Button className="topBtn" resetGame={resetGame} name="Reset" /> }
+      <h1>TIC-TAC-TOE</h1>
+      {visible && (
+        <Button className="topBtn" resetGame={resetGame} name="Reset" />
+      )}
       <div className="game">
         {Array.from("012345678").map((ind) => (
           <Cell
@@ -175,7 +169,6 @@ useEffect(() => {
             updateCells={updateCells}
             clsName={cells[ind]}
             setVisible={setVisible}
-            
           />
         ))}
       </div>
@@ -190,7 +183,11 @@ useEffect(() => {
                 : "No winner"}
             </h2>
             <div>
-              <Button className="bottomBtn" resetGame={resetGame} name="New Game" />
+              <Button
+                className="bottomBtn"
+                resetGame={resetGame}
+                name="New Game"
+              />
             </div>
           </div>
         </div>

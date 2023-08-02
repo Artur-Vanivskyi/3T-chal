@@ -19,7 +19,15 @@ function Game() {
       return cells[a] && cells[a] === cells[b] && cells[a] === cells[c];
     });
 
-    return winSet ? cells[winSet[0]] : null;
+    // ---------- //
+    if(winSet){
+      return cells[winSet[0]];
+    }else {
+      return null;
+    }
+    // ---------- //
+
+    //return winSet ? cells[winSet[0]] : null;
   };
 
   const checkEndTheGame = () => {
@@ -45,7 +53,15 @@ function Game() {
     s[ind] = turn;
     setCells(s); // updating the cells state
 
-    setTurn(turn === "x" ? "o" : "x"); // switch the turn
+   // ---------- //
+   if(turn === "x"){
+    setTurn("o");
+   }else{
+    setTurn("x");
+   }
+   // ---------- //
+   
+    //setTurn(turn === "x" ? "o" : "x"); // switch the turn
     const win = checkWinner();
 
     if (win) {
